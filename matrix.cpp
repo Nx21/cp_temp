@@ -1,4 +1,4 @@
-```c++
+
 #include <iostream>
 #include <complex>
 #include <iomanip>
@@ -110,4 +110,3 @@ int main()
         cout << endl;
     }
 }
-```
