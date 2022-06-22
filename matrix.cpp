@@ -10,9 +10,7 @@
 #include <cmath>
 #include <map>
 #include <set>
-#include <string.h>
-#include <stdlib.h>
-#include <assert.h>
+
 
 using namespace std;
 typedef vector<int> vi;
