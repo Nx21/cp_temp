@@ -11,19 +11,22 @@ class interval_map {
         {}
 
 
-        void assign( K const& keyBegin, K const& keyEnd, V const& val ) {
-            if(!(keyBegin < keyEnd))
-                return;
-            K endVal = (*this)[keyEnd];
-            auto itb = m_map.upper_bound(keyBegin);
-            auto ite = m_map.upper_bound(keyEnd);
-            for (; itb != ite; ) {
-                auto tmp = itb++;
-                m_map.erase(tmp);
-            }
-            m_map.insert(keyBegin, val);
-            m_map.insert(keyEnd, endVal);
+        void assign( K const& keyBegin, K const& keyEnd, V const& val) {
+        if(keyEnd < keyBegin)
+            return;
+        V endVal = (*this)[keyEnd];
+        auto itb = m_map.upper_bound(keyBegin);
+        auto ite = m_map.upper_bound(keyEnd);
+        for (; itb != ite; ) {
+            auto tmp = itb++;
+            m_map.erase(tmp);
         }
+        V startVal = (*this)[keyBegin];
+        if(!(startVal == val))
+            m_map.insert(std::make_pair(keyBegin, val));
+        if(!(val == endVal))
+            m_map.insert(std::make_pair(keyEnd, endVal));
+    }
 
         // look-up of the value associated with key
         V const& operator[]( K const& key ) const {
